@@ -1,5 +1,4 @@
-﻿using System;
-using Quartz;
+﻿using Quartz;
 using Quartz.Impl;
 
 namespace AppHarbor
@@ -20,18 +19,6 @@ namespace AppHarbor
                             .Build();
 
             scheduler.ScheduleJob(job, trigger);
-        }
-
-        public class Yad2ScraperJob : IJob
-        {
-            public void Execute(IJobExecutionContext context)
-            {
-                Console.WriteLine(DateTimeOffset.Now + " Yad2Scraper job started");
-
-                Yad2Scraper.Program.Main();
-                
-                Console.WriteLine(DateTimeOffset.Now + " Yad2Scraper job ended");
-            }
         }
     }
 }
