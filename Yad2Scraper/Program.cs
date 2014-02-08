@@ -52,6 +52,8 @@ namespace Yad2Scraper
 
         private static MongoCollection<BsonDocument> InitaiteDataBaseConnection()
         {
+            _logger.Debug("-->Yad2Scraper::InitaiteDataBaseConnection");
+
             var mongoClient = new MongoClient(DBConnectionString);
             var server = mongoClient.GetServer();
             var database = server.GetDatabase("Yad2Scraper");
@@ -61,16 +63,21 @@ namespace Yad2Scraper
 
             var collection = database.GetCollection(CollectionName);
 
+            _logger.Debug("<--Yad2Scraper::InitaiteDataBaseConnection");
             return collection;
         }
 
 
         private static void SearchNewAds()
         {
+            _logger.Debug("-->Yad2Scraper::SearchNewAds");
+
             foreach (var resource in ResourceList)
             {
                 SearchNewAds(resource);
             }
+
+            _logger.Debug("<--Yad2Scraper::SearchNewAds");
         }
 
 
