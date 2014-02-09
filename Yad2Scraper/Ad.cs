@@ -36,11 +36,19 @@ namespace Yad2Scraper
             Address = adJObject["Line1"].ToString();
             Price = adJObject["Line3"].ToString();
             URL = adJObject["URL"].ToString();
-            Latitude = (double)adJObject["latitude"];
-            Longitude = (double)adJObject["longitude"];
             IsRelevant = true;
             Comment = string.Empty;
             Type = string.Empty;
+            try
+            {
+                Latitude = (double)adJObject["latitude"];
+                Longitude = (double)adJObject["longitude"];
+            }
+            catch (Exception)
+            {
+                Latitude = 0.0;
+                Longitude = 0.0;
+            }
         }
     }
 }
