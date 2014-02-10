@@ -112,7 +112,7 @@ namespace Yad2Scraper
             // Selects all ads from today and yestarday
             var yestardayDate = DateTime.Today.AddDays(-1);
             var ads = from ad in adsList["Results"]
-                      where ad["Line4"] != null && DateTime.ParseExact(ad["Line4"].ToString(), "dd-MM-yyyy", new CultureInfo("he-IL")) >= yestardayDate
+                      where ad["Line4"] != null && DateTime.ParseExact(ad["Line4"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture) >= yestardayDate
                       select ad;
 
             foreach (var ad in ads)
