@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json.Linq;
@@ -30,7 +31,7 @@ namespace Yad2Scraper
         public Ad(JToken adJObject)
         {
             RecordID = adJObject["RecordID"].ToString();
-            Date = DateTime.Parse(adJObject["Line4"].ToString());
+            Date = DateTime.ParseExact(adJObject["Line4"].ToString(), "dd-MM-yyyy", CultureInfo.InvariantCulture);
             LastSeen = DateTime.Today;
             DaysInBoard = LastSeen.Subtract(Date).Days;
             Address = adJObject["Line1"].ToString();
