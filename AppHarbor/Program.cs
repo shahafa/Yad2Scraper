@@ -15,7 +15,7 @@ namespace AppHarbor
             var job = JobBuilder.Create<Yad2ScraperJob>().Build();
 
             var trigger = TriggerBuilder.Create()
-                            .WithCronSchedule("0 0 */4 * * ?")
+                            .WithSimpleSchedule(x => x.WithIntervalInHours(4).RepeatForever())
                             .Build();
 
             scheduler.ScheduleJob(job, trigger);
