@@ -135,7 +135,7 @@ namespace Yad2Scraper
                     adDocument.LastSeen = DateTime.Today;
                     adDocument.DaysInBoard = adDocument.LastSeen.Subtract(adDocument.Date).Days;
                     
-                    // todo look for price change
+                    // todo look for price change 
 
                     _yad2ScraperCollection.Save(adDocument);
                 }
