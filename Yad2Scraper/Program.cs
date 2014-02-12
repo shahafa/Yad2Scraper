@@ -7,7 +7,7 @@ using MongoDB.Driver.Builders;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Linq;
-
+ 
 namespace Yad2Scraper
 {
     public class Program
