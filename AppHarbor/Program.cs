@@ -7,6 +7,8 @@ namespace AppHarbor
     {
         static void Main()
         {
+            Yad2ScraperJob.InitializeLogger();
+
             // construct a scheduler 
             var schedulerFactory = new StdSchedulerFactory();
             var scheduler = schedulerFactory.GetScheduler();
