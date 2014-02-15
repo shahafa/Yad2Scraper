@@ -12,7 +12,7 @@ namespace Yad2Scraper
 {
     public class Program
     {
-        private const string CollectionName = "Yad2ScraperDev";
+        private const string CollectionName = "Yad2Scraper";
 
         private static MongoCollection<BsonDocument> _yad2ScraperCollection;
         private const string DBConnectionString = "mongodb://shahaf:shahaf@troup.mongohq.com:10053/Yad2Scraper";
