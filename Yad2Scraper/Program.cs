@@ -17,6 +17,7 @@ namespace Yad2Scraper
         private static MongoCollection<BsonDocument> _yad2ScraperCollection;
         private const string DBConnectionString = "mongodb://shahaf:shahaf@troup.mongohq.com:10053/Yad2Scraper";
         private static log4net.ILog _logger;
+        private static int _loggerCounter;
 
         private const string BaseUrl = "http://m.yad2.co.il";
         private static readonly string[] ResourceList =
@@ -31,28 +32,39 @@ namespace Yad2Scraper
 
         public static void Main()
         {
+            Execute();
+        }
+
+        public static void Execute()
+        {
             InitializeLogger();
 
-            _logger.Debug("Yad2Scraper process started");
+            _logger.Debug("Yad2Scraper process started (" + _loggerCounter + ")");
 
             _yad2ScraperCollection = InitaiteDataBaseConnection();
             SearchNewAds();
 
-            _logger.Debug("Yad2Scraper process ended");
+            _logger.Debug("Yad2Scraper process ended (" + _loggerCounter + ")");
         }
-
 
         private static void InitializeLogger()
         {
+            if (_logger != null)
+            {
+                _loggerCounter++;
+                return;
+            }
+
             log4net.Config.BasicConfigurator.Configure();
             log4net.NDC.Push(string.Empty);
             _logger = log4net.LogManager.GetLogger(typeof (Program));
+            _loggerCounter = 0;
         }
 
 
         private static MongoCollection<BsonDocument> InitaiteDataBaseConnection()
         {
-            _logger.Debug("-->Yad2Scraper::InitaiteDataBaseConnection");
+            _logger.Debug("-->Yad2Scraper::InitaiteDataBaseConnection (" + _loggerCounter + ")");
 
             var mongoClient = new MongoClient(DBConnectionString);
             var server = mongoClient.GetServer();
@@ -63,21 +75,21 @@ namespace Yad2Scraper
 
             var collection = database.GetCollection(CollectionName);
 
-            _logger.Debug("<--Yad2Scraper::InitaiteDataBaseConnection");
+            _logger.Debug("<--Yad2Scraper::InitaiteDataBaseConnection (" + _loggerCounter + ")");
             return collection;
         }
 
 
         private static void SearchNewAds()
         {
-            _logger.Debug("-->Yad2Scraper::SearchNewAds");
+            _logger.Debug("-->Yad2Scraper::SearchNewAds (" + _loggerCounter + ")");
 
             foreach (var resource in ResourceList)
             {
                 SearchNewAds(resource);
             }
 
-            _logger.Debug("<--Yad2Scraper::SearchNewAds");
+            _logger.Debug("<--Yad2Scraper::SearchNewAds (" + _loggerCounter + ")");
         }
 
 
@@ -134,8 +146,16 @@ namespace Yad2Scraper
                 {
                     adDocument.LastSeen = DateTime.Today;
                     adDocument.DaysInBoard = adDocument.LastSeen.Subtract(adDocument.Date).Days;
-                    
-                    // todo look for price change 
+
+                    // looks for price change
+                    var price = ad["Line3"];
+                    if (price != null)
+                    {
+                        if (!adDocument.Price.Equals(price.ToString()))
+                        {
+                            adDocument.PriceChanged = true;
+                        }
+                    }
 
                     _yad2ScraperCollection.Save(adDocument);
                 }
@@ -151,48 +171,5 @@ namespace Yad2Scraper
 
             return adDocument;
         }
-
-        
-        //private static void ConvertOldDBToNewDB()
-        //{
-        //    var mongoClient = new MongoClient(DBConnectionString);
-        //    var server = mongoClient.GetServer();
-        //    var database = server.GetDatabase("Yad2Scraper");
-
-        //    var oldCollection = database.GetCollection("Yad2Scraper");
-        //    var newCollection = database.GetCollection(CollectionName);
-
-        //    newCollection.RemoveAll();
-
-        //    var oldAdsCollection = oldCollection.FindAll();
-        //    foreach (var oldAd in oldAdsCollection)
-        //    {
-        //        var newAd = new Ad
-        //        {
-        //            RecordID = oldAd["RecordID"].ToString(),
-        //            Date = DateTime.Parse(oldAd["Line4"].ToString()),
-        //            LastSeen = DateTime.Parse(oldAd["Line4"].ToString()),
-        //            DaysInBoard = 0,
-        //            Address = oldAd["Line1"].ToString(),
-        //            Price = oldAd["Line3"].ToString(),
-        //            URL = oldAd["URL"].ToString(),
-        //            IsRelevant = false,
-        //            Comment = string.Empty,
-        //            Type = oldAd["RecordID"].ToString().Length < 8 ? "תיווך" : "פרטי"
-        //        };
-
-        //        try
-        //        {
-        //            newAd.Latitude = (double)oldAd["latitude"];
-        //            newAd.Longitude = (double)oldAd["longitude"];
-        //        }
-        //        catch
-        //        {
-        //            // do nothing
-        //        }
-
-        //        newCollection.Insert(newAd);
-        //    }
-        //}
     }
 }

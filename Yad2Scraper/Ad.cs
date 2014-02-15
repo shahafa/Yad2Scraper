@@ -19,14 +19,13 @@ namespace Yad2Scraper
         public bool IsRelevant { get; set; }
         public string Comment { get; set; }
         public int DaysInBoard { get; set; }
+        public bool PriceChanged { get; set; }
 
         [BsonDateTimeOptions(DateOnly = true)]
         public DateTime Date { get; set; }
 
         [BsonDateTimeOptions(DateOnly = true)]
         public DateTime LastSeen { get; set; }
-
-        public Ad() { }
 
         public Ad(JToken adJObject)
         {
@@ -40,6 +39,7 @@ namespace Yad2Scraper
             IsRelevant = true;
             Comment = string.Empty;
             Type = string.Empty;
+            PriceChanged = false;
             try
             {
                 Latitude = (double)adJObject["latitude"];

@@ -1,26 +1,20 @@
-﻿using Quartz;
-using Quartz.Impl;
+﻿using System.Threading;
 
 namespace AppHarbor
 {
     class Program
     {
+        private const int SleepTimeOut = 14400000;
+
         static void Main()
         {
-            Yad2ScraperJob.InitializeLogger();
+            while (true)
+            {
+                Yad2Scraper.Program.Execute();
 
-            // construct a scheduler 
-            var schedulerFactory = new StdSchedulerFactory();
-            var scheduler = schedulerFactory.GetScheduler();
-            scheduler.Start();
-
-            var job = JobBuilder.Create<Yad2ScraperJob>().Build();
-
-            var trigger = TriggerBuilder.Create()
-                            .WithSimpleSchedule(x => x.WithIntervalInHours(4).RepeatForever())
-                            .Build();
-
-            scheduler.ScheduleJob(job, trigger);
+                // Goto Sleep
+                Thread.Sleep(SleepTimeOut);
+            }
         }
     }
 }
