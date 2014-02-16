@@ -147,14 +147,17 @@ namespace Yad2Scraper
                     adDocument.LastSeen = DateTime.Today;
                     adDocument.DaysInBoard = adDocument.LastSeen.Subtract(adDocument.Date).Days;
 
-                    // looks for price change
-                    var price = ad["Line3"];
-                    if (price != null)
+                    if (!adDocument.PriceChanged)
                     {
-                        if (!adDocument.Price.Equals(price.ToString()))
+                        // looks for price change
+                        var price = ad["Line3"];
+                        if (price != null)
                         {
-                            adDocument.PriceChanged = true;
-                            adDocument.IsRelevant = true;
+                            if (!adDocument.Price.Equals(price.ToString()))
+                            {
+                                adDocument.PriceChanged = true;
+                                adDocument.IsRelevant = true;
+                            }
                         }
                     }
 
