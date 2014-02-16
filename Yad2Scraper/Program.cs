@@ -154,6 +154,7 @@ namespace Yad2Scraper
                         if (!adDocument.Price.Equals(price.ToString()))
                         {
                             adDocument.PriceChanged = true;
+                            adDocument.IsRelevant = true;
                         }
                     }
 
