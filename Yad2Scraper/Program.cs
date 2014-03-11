@@ -107,6 +107,8 @@ namespace Yad2Scraper
                 var response = client.Execute(request);
                 if (response.StatusCode != HttpStatusCode.OK || string.IsNullOrEmpty(response.Content)) break;
 
+                _logger.Debug("bad respsonse: \n" + response.Content);
+
                 var jObject = JObject.Parse(response.Content);
 
                 privateTotalRecords = AddNewAdsToDB(jObject["Private"], true);
