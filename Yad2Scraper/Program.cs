@@ -103,6 +103,8 @@ namespace Yad2Scraper
             {
                 page++;
 
+                _logger.Debug("url: " + BaseUrl + resource);
+
                 var request = new RestRequest(string.Format(resource, page), Method.GET);
                 var response = client.Execute(request);
                 if (response.StatusCode != HttpStatusCode.OK || string.IsNullOrEmpty(response.Content)) break;
