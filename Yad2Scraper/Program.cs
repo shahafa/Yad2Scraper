@@ -22,11 +22,11 @@ namespace Yad2Scraper
         private const string BaseUrl = "http://m.yad2.co.il";
         private static readonly string[] ResourceList =
         {
-            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1316&HomeTypeID=1&FromRooms=3&ToPrice=6200&FromFloor=1&ToFloor=1&AppType=Iphone&Page={0}",     // old north first floor
-            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1316&HomeTypeID=1&FromRooms=3&ToPrice=6200&FromFloor=1&Elevator=1&AppType=Iphone&Page={0}",    // old north with elevator
-            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1410&HomeTypeID=1&FromRooms=3&ToPrice=6200&FromFloor=1&ToFloor=1&AppType=Iphone&Page={0}",     // Kikar HaMedina first floor
-            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1410&HomeTypeID=1&FromRooms=3&ToPrice=6200&FromFloor=1&Elevator=1&AppType=Iphone&Page={0}",    // Kikar HaMedina with elevator
-            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=158&HomeTypeID=1&FromRooms=3&ToPrice=6200&FromFloor=1&AppType=Iphone&Page={0}"                 // Bavli
+            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1316&HomeTypeID=1&FromRooms=3&ToPrice=6500&FromFloor=1&ToFloor=1&AppType=Iphone&Page={0}",     // old north first floor
+            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1316&HomeTypeID=1&FromRooms=3&ToPrice=6500&FromFloor=1&Elevator=1&AppType=Iphone&Page={0}",    // old north with elevator
+            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1410&HomeTypeID=1&FromRooms=3&ToPrice=6500&FromFloor=1&ToFloor=1&AppType=Iphone&Page={0}",     // Kikar HaMedina first floor
+            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=1410&HomeTypeID=1&FromRooms=3&ToPrice=6500&FromFloor=1&Elevator=1&AppType=Iphone&Page={0}",    // Kikar HaMedina with elevator
+            "/API/MadorResults.php?CatID=2&SubCatID=2&CityID=1800&NeighborhoodID=158&HomeTypeID=1&FromRooms=3&ToPrice=6500&FromFloor=1&AppType=Iphone&Page={0}"                 // Bavli
         };
 
 
